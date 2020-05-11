@@ -1,3 +1,6 @@
+/*
+EX 1 -> Sort and Reverse data from string array based on string length.
+*/
 class SortArray {
     names: Array<string> = new Array<string>();
     constructor() {
@@ -15,8 +18,8 @@ class SortArray {
             console.log(n);
         }
     }
-    sortArrayOnLength(arr: Array<string>) {
-       return arr.sort(function (a: string, b: string): number {
+    sortArrayOnLength(arr: Array<string>): Array<string> {
+        return arr.sort(function (a: string, b: string): number {
             if (a.length == b.length)
                 return 0;
             else if (a.length > b.length)

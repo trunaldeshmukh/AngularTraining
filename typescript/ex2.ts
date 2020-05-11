@@ -1,3 +1,9 @@
+/*
+EX 2 -> Define a string variable with data of 100 characheters in it and perform the following operation on the data
+ - Find out the indexes and occurances of character 'a' in it 
+ - Findout number of statements in the string. (value after . symbol) 
+ - Convert the first character of the statement in Upper case.
+*/
 class StringOperations {
     myString: string = `My name is Trunal.i am working for Tavisca.i am currently doing my angular training.`;
     constructor() { }
@@ -26,7 +32,7 @@ class StringOperations {
         }
     }
 
-    convertStatementStratToUpperCase() {
+    convertStatementStartToUpperCase() {
         let statements: Array<string> = this.myString.split('.').filter(m => m.length > 0);
         let newStatements: Array<string> = [];
         statements.forEach(s => {
@@ -44,4 +50,4 @@ class StringOperations {
 let sops = new StringOperations();
 sops.findOccurancesOfCharacter('a');
 sops.findNumberOfStatements();
-sops.convertStatementStratToUpperCase();
+sops.convertStatementStartToUpperCase();

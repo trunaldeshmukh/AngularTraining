@@ -1,3 +1,6 @@
+/*
+EX 1 -> Sort and Reverse data from string array based on string length.
+*/
 var SortArray = /** @class */ (function () {
     function SortArray() {
         this.names = new Array();
