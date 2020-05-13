@@ -1,0 +1,63 @@
+<h2>The Angular Reactive Form</h2>
+<div class="container">
+  <form name="frmprd" [formGroup]='frmPrd' (ngSubmit)="save()">
+    <div class="form-group">
+      <label>Product Id</label>
+      <input type="text" name="ProductId" formControlName="ProductId" class="form-control"
+        [ngClass]="{'invalid-value': frmPrd.controls.ProductId.dirty && !frmPrd.controls.ProductId.valid }">
+      <div class="alert alert-danger" *ngIf="frmPrd.controls.ProductId.dirty && !frmPrd.controls.ProductId.valid">
+        <p *ngIf="frmPrd.controls.ProductId.errors.required">Product Id is required</p>
+        <p *ngIf="frmPrd.controls.ProductId.errors.minlength">Product Id must be 2 digits minimum</p>
+        <p *ngIf="frmPrd.controls.ProductId.errors.maxlength">Product Id must be 6 digits maximum</p>
+        <p *ngIf="frmPrd.controls.ProductId.errors.pattern">Product Id must be positive integer</p>
+        <p *ngIf="frmPrd.controls.ProductId.errors.noteven">Value must be even number</p>
+        <p *ngIf="frmPrd.controls.ProductId.errors.notunique">Product Id already exists</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Product Name</label>
+      <input type="text" name="ProductName" formControlName="ProductName" class="form-control"
+        [ngClass]="{'invalid-value': frmPrd.controls.ProductName.dirty && !frmPrd.controls.ProductName.valid }">
+      <div class="alert alert-danger" *ngIf="frmPrd.controls.ProductName.dirty && !frmPrd.controls.ProductName.valid">
+        <em *ngIf="frmPrd.controls.ProductName.errors.invalidproductname">ProductName should not have Special Character
+          and must start from Upper case character</em>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Price</label>
+      <input type="text" name="Price" formControlName="Price" class="form-control"
+        [ngClass]="{'invalid-value': frmPrd.controls.Price.dirty && !frmPrd.controls.Price.valid }">
+      <div class="alert alert-danger" *ngIf="frmPrd.controls.Price.dirty && !frmPrd.controls.Price.valid">
+        <em *ngIf="frmPrd.controls.Price.errors.required">Product Price is required</em>
+        <em *ngIf="frmPrd.controls.Price.errors.min">Product Price should be minimum 1.</em>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Category</label>
+      <!-- <select name="Category" formControlName="Category" class="form-control"
+        [ngClass]="{'invalid-value': frmPrd.controls.Category.dirty && !frmPrd.controls.Category.valid }">
+        <option *ngFor="let c of cats" value="{{c}}">{{c}}
+        </option>
+      </select> -->
+      <input hidden name="Category" formControlName="Category" class="form-control"
+        [ngClass]="{'invalid-value': frmPrd.controls.Category.dirty && !frmPrd.controls.Category.valid }">
+        <div class="alert alert-danger" *ngIf="frmPrd.controls.Category.dirty && !frmPrd.controls.Category.valid">
+            <em *ngIf="frmPrd.controls.Category.errors.required">Product category is required</em>
+          </div>
+      <app-my-radio-dropdown [values]='cats' (valueEmit)='categorySeelected($event)'></app-my-radio-dropdown>
+
+      <div class="alert alert-danger" *ngIf="frmPrd.controls.Category.dirty && !frmPrd.controls.Category.valid">
+        <p *ngIf="frmPrd.controls.Category.errors.required">Product Category is required</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <!--Event Binding (click)-->
+      <input type="button" value="New" class="btn btn-warning" (click)="clear()">
+      <input type="submit" [disabled]="!frmPrd.valid" value="Save" class="btn btn-success">
+    </div>
+  </form>
+</div>
+<!--The component subscribe to the event emitted by the child component-->
+<!--The data emitted by the child component will be read using
+  the $event object-->
+<app-table-directive [DataSource]="products" (onRowSelected)="getSelectedProduct($event)"></app-table-directive>
