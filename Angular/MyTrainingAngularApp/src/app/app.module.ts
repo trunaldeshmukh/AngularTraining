@@ -1,11 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductReactiveFormComponent } from './components/productreactivecomponent/app.productreactiveform.component';
 import { TableDirectiveComponent } from './directives/table.component.directive';
 import { RadioDropDownComponent } from './directives/radiodropdown/radiodropdown.component';
+
+import { SimpleElementComponent } from './litelementcomponents/app.simple.element.component';
+
+
+// import all LitElements from its path
+import './litelementapp/app.simpleelement.litelement';
 
 // imports: array that imports all standard Angular moaulds and custom
 // extenal modules for the current NG App.
@@ -35,7 +41,8 @@ import { RadioDropDownComponent } from './directives/radiodropdown/radiodropdown
     BrowserModule, FormsModule, ReactiveFormsModule,
     AppRoutingModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
-  bootstrap: [ProductReactiveFormComponent]
+  bootstrap: [SimpleElementComponent]
 })
 export class AppModule { }
