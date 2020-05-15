@@ -8,10 +8,12 @@ import { TableDirectiveComponent } from './directives/table.component.directive'
 import { RadioDropDownComponent } from './directives/radiodropdown/radiodropdown.component';
 
 import { SimpleElementComponent } from './litelementcomponents/app.simple.element.component';
+import {DataGridComponent} from './litelementcomponents/app.datagridelement.component';
 
 
 // import all LitElements from its path
 import './litelementapp/app.simpleelement.litelement';
+import './litelementapp/app.datagrid.litelement';
 
 // imports: array that imports all standard Angular moaulds and custom
 // extenal modules for the current NG App.
@@ -35,7 +37,9 @@ import './litelementapp/app.simpleelement.litelement';
     AppComponent,
     ProductReactiveFormComponent,
     TableDirectiveComponent,
-    RadioDropDownComponent
+    RadioDropDownComponent,
+    SimpleElementComponent,
+    DataGridComponent
   ],
   imports: [
     BrowserModule, FormsModule, ReactiveFormsModule,
@@ -43,6 +47,6 @@ import './litelementapp/app.simpleelement.litelement';
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
-  bootstrap: [SimpleElementComponent]
+  bootstrap: [DataGridComponent]
 })
 export class AppModule { }

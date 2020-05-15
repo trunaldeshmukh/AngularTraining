@@ -49,8 +49,8 @@ export class SimpleElement extends LitElement {
 
     constructor() {
         super();
-        this.name = "Polymer Web Component using Lit-Element";
-        // this.n1 = 'Tejas';
+        this.name = 'Polymer Web Component using Lit-Element';
+        this.n1 = 'Tejas';
         this.n2 = 120;
         this.n3 = ['A', 'B', 'C'];
         this.n4 = { id: 101, name: 'P1' };
