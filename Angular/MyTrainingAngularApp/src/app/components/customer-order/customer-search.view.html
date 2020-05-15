@@ -1,0 +1,7 @@
+<div class="row p-3">
+  <input class="form-control col-md-3" type="text" [(ngModel)]="searchFilter.CustomerName" placeholder="add name to filter">
+  <div class="col-md-1 d-flex justify-content-center align-items-center"><em>or</em></div>
+  <input class="form-control col-md-3" type="text" [(ngModel)]="searchFilter.CustomerCity" placeholder="add city to filter">
+  <div class="col-md-2"><button class="btn btn-primary" (click)="search()">Filter customers</button>
+  </div>
+</div>

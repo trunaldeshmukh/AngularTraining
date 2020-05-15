@@ -1,0 +1,27 @@
+<div *ngIf="orders && orders.length > 0; else noOrders">
+    <div>
+        <table class="table table-striped">
+          <thead>
+            <th>Customer Id</th>
+            <th>Order Id</th>
+            <th>Order Name</th>
+            <th>Order Date</th>
+            <th>Order Quantity</th>
+            <th>Order Amount</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let c of orders">
+              <td>{{c.CustomerId}}</td>
+              <td>{{c.OrderId}}</td>
+              <td>{{c.OrderName}}</td>
+              <td>{{c.Date | date}}</td>
+              <td>{{c.Quantity}}</td>
+              <td>{{c.Amount | currency}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+</div>
+<ng-template #noOrders>
+    <em>No orders found</em>
+</ng-template>
