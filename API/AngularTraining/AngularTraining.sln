@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngularTraining", "AngularTraining\AngularTraining.csproj", "{1620577B-5E71-4D73-AC2A-CBADE2EAF4E1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASPNERCore31_JWT", "..\netcore31jwt-master\ASPNERCore31_JWT.csproj", "{C5F2B0FB-C70E-4CF0-97E0-A5383B10AFB0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1620577B-5E71-4D73-AC2A-CBADE2EAF4E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1620577B-5E71-4D73-AC2A-CBADE2EAF4E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1620577B-5E71-4D73-AC2A-CBADE2EAF4E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1620577B-5E71-4D73-AC2A-CBADE2EAF4E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5F2B0FB-C70E-4CF0-97E0-A5383B10AFB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5F2B0FB-C70E-4CF0-97E0-A5383B10AFB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5F2B0FB-C70E-4CF0-97E0-A5383B10AFB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5F2B0FB-C70E-4CF0-97E0-A5383B10AFB0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8B366313-0C50-4D05-A1C2-E15F18E246FB}
+	EndGlobalSection
+EndGlobal
