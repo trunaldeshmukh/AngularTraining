@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ProductComponent } from './components/productcomponent/app.product.component';
 import { ProductReactiveFormComponent } from './components/productreactivecomponent/app.productreactiveform.component';
 import { TableDirectiveComponent } from './directives/table.component.directive';
 import { RadioDropDownComponent } from './directives/radiodropdown/radiodropdown.component';
@@ -13,6 +15,9 @@ import { DataGridComponent } from './litelementcomponents/app.datagridelement.co
 import { CustomerOrderDetailsComponent } from './components/customer-order/customeorderdetails.component';
 import { OrderListComponent } from './components/customer-order/orderlist.component';
 import { CustomerSearchComponent } from './components/customer-order/customersearch.component';
+
+import { HttpServiceComponent } from './components/httpservicecomponent/app.httpservice.component';
+import { UniqueProductIdDirective } from './directives/customDirectives/app.uniqueproductid.directives';
 
 // import all LitElements from its path
 import './litelementapp/app.simpleelement.litelement';
@@ -39,6 +44,7 @@ import { from } from 'rxjs';
 @NgModule({
   declarations: [
     AppComponent,
+    ProductComponent,
     ProductReactiveFormComponent,
     TableDirectiveComponent,
     RadioDropDownComponent,
@@ -46,14 +52,16 @@ import { from } from 'rxjs';
     DataGridComponent,
     CustomerOrderDetailsComponent,
     OrderListComponent,
-    CustomerSearchComponent
+    CustomerSearchComponent,
+    HttpServiceComponent,
+    UniqueProductIdDirective
   ],
   imports: [
     BrowserModule, FormsModule, ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule, HttpClientModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
-  bootstrap: [CustomerOrderDetailsComponent]
+  bootstrap: [ProductComponent]
 })
 export class AppModule { }

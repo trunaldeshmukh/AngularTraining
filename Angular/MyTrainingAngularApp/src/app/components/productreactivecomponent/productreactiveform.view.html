@@ -3,8 +3,8 @@
   <form name="frmprd" [formGroup]='frmPrd' (ngSubmit)="save()">
     <div class="form-group">
       <label>Product Id</label>
-      <input type="text" name="ProductId" formControlName="ProductId" class="form-control"
-        [ngClass]="{'invalid-value': frmPrd.controls.ProductId.dirty && !frmPrd.controls.ProductId.valid }">
+      <input type="text" [uniqueProductId]='frmPrd.controls.ProductId.value' name="ProductId" formControlName="ProductId" class="form-control"
+        [ngClass]="{'': frmPrd.controls.ProductId.dirty && !frmPrd.controls.ProductId.valid }">
       <div class="alert alert-danger" *ngIf="frmPrd.controls.ProductId.dirty && !frmPrd.controls.ProductId.valid">
         <p *ngIf="frmPrd.controls.ProductId.errors.required">Product Id is required</p>
         <p *ngIf="frmPrd.controls.ProductId.errors.minlength">Product Id must be 2 digits minimum</p>

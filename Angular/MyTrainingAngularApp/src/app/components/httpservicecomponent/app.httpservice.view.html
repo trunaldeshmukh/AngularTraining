@@ -1,0 +1,10 @@
+<h1>The Http Service Calls from Angular Apps</h1>
+
+<input type="button" value="Get" (click)="loadData()">
+<br />
+<input type="button" value="Post" (click)="save()">
+<br />
+
+<div class="row p-3">
+  <input type="text" placeholder="enter product id" style="width: 250px;" [uniqueProductId]='ProductId' [(ngModel)]="ProductId" class="form-control">
+</div>
