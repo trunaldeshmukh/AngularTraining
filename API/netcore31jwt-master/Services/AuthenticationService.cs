@@ -2,9 +2,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -21,13 +24,14 @@ namespace ASPNERCore31_JWT.Services
         IConfiguration configuration;
         SignInManager<IdentityUser> signInManager;
         UserManager<IdentityUser> userManager;
+        string filepath = Directory.GetCurrentDirectory() + "\\Users.json";
         /// <summary>
         /// 1.
         /// </summary>
         /// <param name="configuration"></param>
         /// <param name="signInManager"></param>
         /// <param name="userManager"></param>
-        public CoreAuthService(IConfiguration configuration, 
+        public CoreAuthService(IConfiguration configuration,
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager)
         {
@@ -35,7 +39,7 @@ namespace ASPNERCore31_JWT.Services
             this.signInManager = signInManager;
             this.userManager = userManager;
         }
-        
+
         /// <summary>
         /// 2.
         /// </summary>
@@ -44,14 +48,29 @@ namespace ASPNERCore31_JWT.Services
         public async Task<bool> RegisterUserAsync(RegisterUser register)
         {
             bool IsCreated = false;
-            var registerUser = new IdentityUser() { UserName = register.Email, Email = register.Email };
-            // 2a.
-            var result = await userManager.CreateAsync(registerUser, register.Password);
-            if (result.Succeeded)
+            List<RegisterUser> users = new List<RegisterUser> { };
+            if (File.Exists(this.filepath))
             {
-                IsCreated = true;
+                string lines = File.ReadAllText(this.filepath);
+                if (!string.IsNullOrEmpty(lines))
+                    users = JsonConvert.DeserializeObject<List<RegisterUser>>(lines);
             }
-            return IsCreated;
+            if (users?.Count > 0)
+                users.Add(register);
+            else
+                users = new List<RegisterUser> { register };
+
+
+            File.WriteAllText(this.filepath, JsonConvert.SerializeObject(users));
+            //var registerUser = new IdentityUser() { UserName = register.Email, Email = register.Email };
+            //// 2a.
+            //var result = await userManager.CreateAsync(registerUser, register.Password);
+            //if (result.Succeeded)
+            //{
+            //    IsCreated = true;
+            //}
+            //return IsCreated;
+            return true;
         }
         /// <summary>
         /// 3.
@@ -60,12 +79,28 @@ namespace ASPNERCore31_JWT.Services
         /// <returns></returns>
         public async Task<string> AuthenticateUserAsync(LoginUser inputModel)
         {
-            
-            string jwtToken ="";
-           
+
+            string jwtToken = "";
+            List<RegisterUser> users = new List<RegisterUser> { };
+            bool success = false;
+            if (File.Exists(this.filepath))
+            {
+                string lines = File.ReadAllText(this.filepath);
+                if(!string.IsNullOrEmpty(lines))
+                users = JsonConvert.DeserializeObject<List<RegisterUser>>(lines);
+            }
+            if (users?.Count > 0)
+            {
+                var user = users.Where(m => string.Equals(m.Email, inputModel.UserName, StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
+                if (user != null)
+                {
+                    success = true;
+                }
+            }
+
             // 3a.
-           var result =  await signInManager.PasswordSignInAsync(inputModel.UserName, inputModel.Password, false, lockoutOnFailure: true);
-            if (result.Succeeded)
+            //  var result = await signInManager.PasswordSignInAsync(inputModel.UserName, inputModel.Password, false, lockoutOnFailure: true);
+            if (success)
             {
                 //3b Read the secret key and the expiration from the configuration 
                 var secretKey = Convert.FromBase64String(configuration["JWTCoreSettings:SecretKey"]);
@@ -80,7 +115,7 @@ namespace ASPNERCore31_JWT.Services
                 // there is no third-party issuer
                 var securityTokenDescription = new SecurityTokenDescriptor()
                 {
-                    Issuer = null, 
+                    Issuer = null,
                     Audience = null,
                     Subject = new ClaimsIdentity(new List<Claim> {
                         new Claim("username",user.Id,ToString()),
@@ -97,7 +132,7 @@ namespace ASPNERCore31_JWT.Services
             }
             else
             {
-                jwtToken =  "Login failed"; 
+                jwtToken = "Login failed";
             }
 
             return jwtToken;
