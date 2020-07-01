@@ -8,13 +8,13 @@ export default class OrxeRatingBar extends LitElement {
    * Implement `render` to define a template for button element.
    */
   @property({ type: String, reflect: true })
-  type = 'donut';
+  type = 'linear';
 
   @property({ type: Number, reflect: true })
-  rating = 50;
+  rating = 0;
 
   @property({ type: String, reflect: true })
-  label = 'Rating';
+  label = '';
 
   private actualRating = 0;
 
